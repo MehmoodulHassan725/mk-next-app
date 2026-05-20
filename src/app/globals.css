@@ -207,7 +207,7 @@
         @apply flex flex-2 flex-col gap-8 max-lg:w-full;
 
         .banner {
-          @apply max-h-114.25 w-full rounded-lg object-cover;
+          @apply max-h-114.25 w-full h-auto rounded-lg object-cover;
         }
 
         .agenda {
