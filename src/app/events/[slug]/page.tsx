@@ -1,22 +1,21 @@
-import { notFound } from 'next/navigation';
-import { getSimilarEventBySlug } from '@/lib/actions/event.actions';
-import EventDetail from '@/app/components/EventDetail';
-import { cacheLife } from 'next/cache';
+import { notFound } from "next/navigation";
+import { getSimilarEventBySlug } from "@/lib/actions/event.actions";
+import EventDetail from "@/app/components/EventDetail";
+import { cacheLife } from "next/cache";
+import { getEventBySlug } from '@/lib/user';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  "use cache"
-  cacheLife('hours')
+const EventDetailsPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  "use cache";
+  cacheLife("hours");
   const { slug } = await params;
 
-  const res = await fetch(`${BASE_URL}/api/events/${slug}`, {
-    next: { revalidate: 3600 },  
-  });
-
-  if (!res.ok) return notFound();
-
-  const { event } = await res.json();
+  const { event } = await getEventBySlug(slug);
 
   if (!event?.description) return notFound();
 
@@ -24,9 +23,9 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }> 
 
   return (
     <EventDetail
-      event={event} 
-      similarEvents={similarEvents} 
-      slug={slug} 
+      event={event}
+      similarEvents={similarEvents}
+      slug={slug}
       eventId={event._id}
     />
   );
