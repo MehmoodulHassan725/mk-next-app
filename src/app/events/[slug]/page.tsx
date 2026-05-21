@@ -4,7 +4,7 @@ import EventDetail from "@/app/components/EventDetail";
 import { cacheLife } from "next/cache";
 import { getEventBySlug } from '@/lib/user';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const EventDetailsPage = async ({
   params,

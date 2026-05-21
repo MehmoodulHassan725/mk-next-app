@@ -4,11 +4,11 @@ import connectDB from "../mongoose";
 export const getEvents = async () => {
   try {
     await connectDB();
-    const events = await Event.find().sort({ createdAt: -1 });
+    const events = await Event.find().sort({ createdAt: -1 }).lean();
 
     return {
       message: "events fetched successfully",
-      events,
+      events: JSON.parse(JSON.stringify(events)),
       status: 200,
     };
   } catch (e) {

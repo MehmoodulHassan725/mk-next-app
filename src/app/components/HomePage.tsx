@@ -4,11 +4,13 @@ import { IEvent } from "@/database/eventmodel";
 import { cacheLife } from "next/cache";
 import { getEvents } from "@/lib/user";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const HomePage = async () => {
-  "use cache";
-  cacheLife("hours");
+  // "use cache";
+  // cacheLife("hours");
   const { events } = await getEvents();
+
+  // console.log(events,"===== kkkkevent =========")
   return (
     // <div className='bg-green-400'>My first page</div>
     <section>
